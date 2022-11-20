@@ -1,10 +1,21 @@
-#ifndef _STRING_MANIP_INCLUDED_H_
-#define _STRING_MANIP_INCLUDED_H_
+#ifndef _LIB_MEM_MANIP_INCLUDED_H_
+#define _LIB_MEM_MANIP_INCLUDED_H_
 
-char *str_replace(char *dest, const char *src, const char *r_text, const char *n_text);
-char **str_split(char ***dest, const char *src, const char *delim);
-void str_split_free(char ***dest);
-const char *str_capitalize(char *dest, const char *src, int from_idx, int to_idx);
-int str_occurrences(const char *src, const char *occurrence);
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
-#endif // _STRING_MANIP_INCLUDED_H_
+extern char * __cdecl mem_replace(char *dest, const char *src, const char *r_text, const char *n_text);
+extern char **__cdecl mem_split(char ***dest, const char *src, const char *delim);
+extern void __cdecl mem_split_free(char ***dest);
+extern char * __cdecl mem_capitalize(char *dest, const char *src, int from_idx, int to_idx);
+extern int __cdecl mem_occurrences(const char *src, const char *occurrence);
+extern char * __cdecl mem_trim(char *dest, const char *src);
+extern char * __cdecl mem_trim_front(char *dest, const char *src);
+extern char * __cdecl mem_trim_back(char *dest, const char *src);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif // _LIB_MEM_MANIP_INCLUDED_H_
