@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mem_manip.h"
+#include "str_manip.h"
 #include "common.h"
 
-#define mem_split_static(dest, dest_len, dest_str_len, src, delim) \
+#define strsplitstatic(dest, dest_len, dest_str_len, src, delim) \
 { \
     char src_temp[strlen(src) + 1], *token; \
     int i; \
@@ -15,24 +15,25 @@
     } \
 }
 
-int is_occurrence(const char *src, const char *occurrence)
+static inline int strisocc(const char *src, const char *occurrence)
 {
     while (*occurrence != '\0')
         if (*occurrence++ != *src++) return 0;
     return 1;
 }
 
-char *mem_replace(char *dest, const char *src, const char *r_text, const char *n_text)
+char *str_rep(char *dest, const char *src, const char *r_text, const char *n_text)
 {
-    char *dest_p = dest;
-    const char *src_p = src, *r_text_p = r_text, *n_text_p = n_text;
+    char *dest_p = dest, src_temp[strlen(src) + 1], *r_text_p = (char *)r_text;
+    char *src_p = &src_temp[0], *n_text_p = (char *)n_text;
     int r_text_len = strlen(r_text);
+    sprintf(src_temp, "%s", src);
     while (*src_p != '\0') {
         if (*src_p == *r_text_p)
-            if (is_occurrence(src_p + 1, r_text_p + 1)) {
+            if (strisocc(src_p + 1, r_text_p + 1)) {
                 while (*n_text_p != '\0')
                     *dest_p++ = *n_text_p++;
-                n_text_p = n_text, src_p += r_text_len;
+                n_text_p = (char *)n_text, src_p += r_text_len;
                 continue;
             }
         *dest_p++ = *src_p++;
@@ -41,9 +42,9 @@ char *mem_replace(char *dest, const char *src, const char *r_text, const char *n
     return dest;
 }
 
-char **mem_split(char ***dest, const char *src, const char *delim)
+char **str_split(char ***dest, const char *src, const char *delim)
 {
-    int occur = mem_occurrences(src, delim) + 2;
+    int occur = strisocc(src, delim) + 2;
     char src_temp[strlen(src) + 1], *token;
     char **dest_p = *dest = (char **)malloc(occur * sizeof(char *));
     sprintf(src_temp, "%s", src);
@@ -55,7 +56,7 @@ char **mem_split(char ***dest, const char *src, const char *delim)
     return *dest;
 }
 
-void mem_split_free(char ***dest)
+void str_split_free(char ***dest)
 {
     char **dest_p = *dest;
     while (*dest_p != NULL)
@@ -63,30 +64,42 @@ void mem_split_free(char ***dest)
     free(*dest);
 }
 
-char *mem_capitalize(char *dest, const char *src, int from_idx, int to_idx)
+char *str_cap(char *dest, const char *src)
 {
+    while (*src != '\0')
+        *dest++ = (*src > 0x60 && *src < 0x7B) ? (*src++ - 0x20) : *src++;
+    *dest = '\0';
     return dest;
 }
 
-int mem_occurrences(const char *src, const char *occurrence)
+char *strn_cap(char *dest, const char *src, size_t n)
+{
+    int i = 0;
+    while (*src != '\0')
+        *dest++ = (i++ < n && (*src > 0x60 && *src < 0x7B)) ? (*src++ - 0x20) : *src++;
+    *dest = '\0';
+    return dest;
+}
+
+int str_occ(const char *src, const char *occurrence)
 {
     int i;
     for (i = 0; *src != '\0'; src++)
         if (*src == *occurrence)
-            if (is_occurrence(src + 1, occurrence + 1)) ++i;
+            if (strisocc(src + 1, occurrence + 1)) ++i;
     return i;
 }
 
-char *mem_trim(char *dest, const char *src)
+char *str_trim(char *dest, const char *src)
 {
-    char *dest_p = dest;
+    char *__dest_p = dest;
     trim_front(src);
-    while (*src != '\0') *dest_p++ = *src++; --dest_p;
-    trim_back(dest_p); *++dest_p = '\0';
+    while (*src != '\0') *__dest_p++ = *src++; --__dest_p;
+    trim_back(__dest_p); *++__dest_p = '\0';
     return dest;
 }
 
-char *mem_trim_front(char *dest, const char *src)
+char *str_trimf(char *dest, const char *src)
 {
     char *dest_p = dest;
     trim_front(src);
@@ -94,7 +107,7 @@ char *mem_trim_front(char *dest, const char *src)
     return dest;
 }
 
-char *mem_trim_back(char *dest, const char *src)
+char *str_trimb(char *dest, const char *src)
 {
     char *dest_p = dest;
     while (*src != '\0') *dest_p++ = *src++; --dest_p;
