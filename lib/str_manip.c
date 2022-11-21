@@ -22,7 +22,7 @@ static inline int strisocc(const char *src, const char *occurrence)
     return 1;
 }
 
-char *str_rep(char *dest, const char *src, const char *r_text, const char *n_text)
+char *str_repl(char *dest, const char *src, const char *r_text, const char *n_text)
 {
     char *dest_p = dest, src_temp[strlen(src) + 1], *r_text_p = (char *)r_text;
     char *src_p = &src_temp[0], *n_text_p = (char *)n_text;
@@ -62,6 +62,23 @@ void str_split_free(char ***dest)
     while (*dest_p != NULL)
         free(*dest_p), dest_p++;
     free(*dest);
+}
+
+char *str_lowerc(char *dest, const char *src)
+{
+    while (*src != '\0')
+        *dest++ = (*src > 0x40 && *src < 0x5B) ? (*src++ + 0x20) : *src++;
+    *dest = '\0';
+    return dest;
+}
+
+char *strn_lowerc(char *dest, const char *src, size_t n)
+{
+    int i = 0;
+    while (*src != '\0')
+        *dest++ = (i++ < n && (*src > 0x40 && *src < 0x5B)) ? (*src++ + 0x20) : *src++;
+    *dest = '\0';
+    return dest;
 }
 
 char *str_upperc(char *dest, const char *src)
