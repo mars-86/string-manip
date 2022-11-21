@@ -43,7 +43,7 @@ char *mem_replace(char *dest, const char *src, const char *r_text, const char *n
 
 char **mem_split(char ***dest, const char *src, const char *delim)
 {
-    int occur = str_occurrences(src, delim) + 2;
+    int occur = mem_occurrences(src, delim) + 2;
     char src_temp[strlen(src) + 1], *token;
     char **dest_p = *dest = (char **)malloc(occur * sizeof(char *));
     sprintf(src_temp, "%s", src);
@@ -79,28 +79,25 @@ int mem_occurrences(const char *src, const char *occurrence)
 
 char *mem_trim(char *dest, const char *src)
 {
-    char *desp_p = dest;
-    while (*src != '\0')
-        if (trim_test_n(*src)) *desp_p++ = *src++;
-    *desp_p = '\0';
+    char *dest_p = dest;
+    trim_front(src);
+    while (*src != '\0') *dest_p++ = *src++; --dest_p;
+    trim_back(dest_p); *++dest_p = '\0';
     return dest;
 }
 
 char *mem_trim_front(char *dest, const char *src)
 {
-    char *desp_p = dest;
-    while (trim_test(*src)) ++src;
-    while (*src != '\0') *desp_p++ = *src++;
-    *desp_p = '\0';
+    char *dest_p = dest;
+    trim_front(src);
+    while (*src != '\0') *dest_p++ = *src++; *dest_p = '\0';
     return dest;
 }
 
 char *mem_trim_back(char *dest, const char *src)
 {
-    char *desp_p = dest;
-    while (*src != '\0')
-        if (trim_test_n(*src)) *desp_p++ = *src++;
-    while (trim_test(*desp_p)) --desp_p;
-    *++desp_p = '\0';
+    char *dest_p = dest;
+    while (*src != '\0') *dest_p++ = *src++; --dest_p;
+    trim_back(dest_p); *++dest_p = '\0';
     return dest;
 }
