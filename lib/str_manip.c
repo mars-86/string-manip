@@ -64,7 +64,7 @@ void str_split_free(char ***dest)
     free(*dest);
 }
 
-char *str_cap(char *dest, const char *src)
+char *str_upperc(char *dest, const char *src)
 {
     while (*src != '\0')
         *dest++ = (*src > 0x60 && *src < 0x7B) ? (*src++ - 0x20) : *src++;
@@ -72,7 +72,7 @@ char *str_cap(char *dest, const char *src)
     return dest;
 }
 
-char *strn_cap(char *dest, const char *src, size_t n)
+char *strn_upperc(char *dest, const char *src, size_t n)
 {
     int i = 0;
     while (*src != '\0')
