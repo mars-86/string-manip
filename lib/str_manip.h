@@ -6,7 +6,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* replace RTEXT existing in SRC for NTEXT to DEST */
-extern char * __cdecl str_repl(char *__restrict __dest, const char *__restrict __src, const char *__restrict __rtext, const char *__restrict __ntext)
+extern char * __cdecl str_replace(char *__restrict __dest, const char *__restrict __src, const char *__restrict __rtext, const char *__restrict __ntext)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2) __MINGW_ATTRIB_NONNULL(3) __MINGW_ATTRIB_NONNULL(4);
 
 /* split SRC according to DELIM to DEST */
