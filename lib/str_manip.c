@@ -4,6 +4,12 @@
 #include "str_manip.h"
 #include "common.h"
 
+#define COPY_BYTES_FWD(dest, src) \
+    do { \
+        while (*src != '\0') \
+            *dest++ = *src++; \
+    } while (0)
+
 #define strsplitstatic(dest, dest_len, dest_str_len, src, delim) \
 { \
     char __src_temp[strlen(src) + 1], *token; \
@@ -22,10 +28,10 @@ static inline int strisocc(const char *src, const char *occurrence)
     return 1;
 }
 
-char *str_replace(char *dest, const char *src, const char *rtext, const char *n_text)
+char *str_replace(char *dest, const char *src, const char *rtext, const char *ntext)
 {
     char *__dest = dest, __src_temp[strlen(src) + 1], *__rtext = (char *)rtext;
-    char *src_p = &__src_temp[0], *__ntext = (char *)n_text;
+    char *src_p = &__src_temp[0], *__ntext = (char *)ntext;
     int r_text_len = strlen(rtext);
     sprintf(__src_temp, "%s", src);
     while (*src_p != '\0') {
@@ -33,7 +39,7 @@ char *str_replace(char *dest, const char *src, const char *rtext, const char *n_
             if (strisocc(src_p + 1, __rtext + 1)) {
                 while (*__ntext != '\0')
                     *__dest++ = *__ntext++;
-                __ntext = (char *)n_text, src_p += r_text_len;
+                __ntext = (char *)ntext, src_p += r_text_len;
                 continue;
             }
         *__dest++ = *src_p++;
@@ -129,5 +135,44 @@ char *str_trimb(char *dest, const char *src)
     char *__dest = dest;
     while (*src != '\0') *__dest++ = *src++; --__dest;
     trim_back(__dest); *++__dest = '\0';
+    return dest;
+}
+
+char *str_pad_front(char *dest, const char *src, const char *ptext, int padding)
+{
+    char *__dest = dest;
+    size_t __src_len = strlen(src);
+    if (padding < __src_len) {
+        COPY_BYTES_FWD(__dest, src); *__dest ='\0';
+    } else {
+        const char *__ptext = ptext;
+        int i = 0, __padding_chars = padding - __src_len;
+        while (i < __padding_chars) {
+            while(*__ptext != '\0' && i++ < __padding_chars)
+                *__dest++ = *__ptext++;
+            __ptext = ptext;
+        }
+        COPY_BYTES_FWD(__dest, src); *__dest ='\0';
+    }
+    return dest;
+}
+
+char *str_pad_back(char *dest, const char *src, const char *ptext, int padding)
+{
+    char *__dest = dest;
+    size_t __src_len = strlen(src);
+    if (padding < __src_len) {
+        COPY_BYTES_FWD(__dest, src); *__dest ='\0';
+    } else {
+        const char *__ptext = ptext;
+        int i = 0, __padding_chars = padding - __src_len;
+        COPY_BYTES_FWD(__dest, src);
+        while (i < __padding_chars) {
+            while(*__ptext != '\0' && i++ < __padding_chars)
+                *__dest++ = *__ptext++;
+            __ptext = ptext;
+        }
+        *__dest ='\0';
+    }
     return dest;
 }
