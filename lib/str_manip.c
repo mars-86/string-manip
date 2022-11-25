@@ -28,28 +28,6 @@ static inline int strisocc(const char *src, const char *occurrence)
     return 1;
 }
 
-char **str_split(char ***dest, const char *src, const char *delim)
-{
-    int __occur = strisocc(src, delim) + 2;
-    char __src_temp[strlen(src) + 1], *__token;
-    char **__dest = *dest = (char **)malloc(__occur * sizeof(char *));
-    sprintf(__src_temp, "%s", src);
-    for(__token = strtok(__src_temp, delim); __token != NULL; __token = strtok(NULL, delim), __dest++) {
-        *__dest = (char *)malloc((strlen(__token) + 1) * sizeof(char));
-        sprintf(*__dest, "%s", __token);
-    }
-    *__dest = NULL;
-    return *dest;
-}
-
-void str_split_free(char ***dest)
-{
-    char **__dest = *dest;
-    while (*__dest != NULL)
-        free(*__dest), __dest++;
-    free(*dest);
-}
-
 char *str_lowerc(char *dest, const char *src)
 {
     while (*src != '\0')
