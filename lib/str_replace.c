@@ -1,5 +1,5 @@
-#include "str_manip.h"
 #include <stdio.h>
+#include "str_manip.h"
 
 static inline int str_is_match(const char *src, const char *word)
 {

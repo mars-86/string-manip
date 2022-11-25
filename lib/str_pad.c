@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "str_manip.h"
-#include "common.h"
+#include "byte_copy.h"
 
 char *str_pad_front(char *dest, const char *src, const char *ptext, int padding)
 {
