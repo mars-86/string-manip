@@ -15,7 +15,7 @@ extern char **__cdecl str_split(char ***__restrict __dest, const char *__restric
 
 /* free SRC created previously with strsplit */
 extern void __cdecl str_split_free(char ***__src)
-    __MINGW_NOTHROW;
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
 
 /* to lower case SRC to DEST */
 extern char * __cdecl str_lowerc(char *__restrict __dest, const char *__restrict __src)
@@ -47,6 +47,14 @@ extern char * __cdecl str_trimf(char *__restrict __dest, const char *__restrict 
 
 /* trim SRC back to DEST */
 extern char * __cdecl str_trimb(char *__restrict __dest, const char *__restrict __src)
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
+
+/*  */
+extern char *__cdecl str_pad_front(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
+
+/*  */
+extern char *__cdecl str_pad_back(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 #ifdef __cplusplus
