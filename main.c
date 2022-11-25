@@ -20,17 +20,20 @@ int main(void)
     printf("%d\n", str_includes_from(s1, "To be", 1)); // false
     printf("%d\n", str_includes(s1, "TO BE")); // false
 
-    const char *src2 = "abc";
+    const char *s2 = "abc";
     char dest[128];
 
-    printf("\n%s\n", str_pad_front(dest, src2, " ", 10)); // "       abc"
-    printf("%s\n", str_pad_front(dest, src2, "foo", 10)); // "foofoofabc"
-    printf("%s\n", str_pad_front(dest, src2, "123465", 6)); // "123abc"
-    printf("%s\n", str_pad_front(dest, src2, "0", 8)); // "00000abc"
-    printf("%s\n", str_pad_front(dest, src2, " ", 1)); // "abc"
+    printf("\n%s\n", str_pad_front(dest, s2, " ", 10)); // "       abc"
+    printf("%s\n", str_pad_front(dest, s2, "foo", 10)); // "foofoofabc"
+    printf("%s\n", str_pad_front(dest, s2, "123465", 6)); // "123abc"
+    printf("%s\n", str_pad_front(dest, s2, "0", 8)); // "00000abc"
+    printf("%s\n", str_pad_front(dest, s2, " ", 1)); // "abc"
 
-    printf("\n%s\n", str_pad_back(dest, src2, " ", 10)); // "abc       "
-    printf("%s\n", str_pad_back(dest, src2, "foo", 10)); // "abcfoofoof"
-    printf("%s\n", str_pad_back(dest, src2, "123456", 6)); // "abc123"
-    printf("%s\n", str_pad_back(dest, src2, " ", 1)); // "abc"
+    printf("\n%s\n", str_pad_back(dest, s2, " ", 10)); // "abc       "
+    printf("%s\n", str_pad_back(dest, s2, "foo", 10)); // "abcfoofoof"
+    printf("%s\n", str_pad_back(dest, s2, "123456", 6)); // "abc123"
+    printf("%s\n", str_pad_back(dest, s2, " ", 1)); // "abc"
+
+    printf("\n%s\n", str_replace(dest, s1, "be", "ass"));
+    printf("\n%s\n", str_replace(dest, dest, "question", "matter"));
 }

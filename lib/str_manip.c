@@ -30,19 +30,18 @@ static inline int strisocc(const char *src, const char *occurrence)
 
 char *str_replace(char *dest, const char *src, const char *rtext, const char *ntext)
 {
-    char *__dest = dest, __src_temp[strlen(src) + 1], *__rtext = (char *)rtext;
-    char *src_p = &__src_temp[0], *__ntext = (char *)ntext;
-    int r_text_len = strlen(rtext);
-    sprintf(__src_temp, "%s", src);
-    while (*src_p != '\0') {
-        if (*src_p == *__rtext)
-            if (strisocc(src_p + 1, __rtext + 1)) {
+    char *__dest = dest;
+    const char *__src = src, *__rtext = rtext, *__ntext = ntext;
+    size_t r_text_len = strlen(rtext);
+    while (*__src != '\0') {
+        if (*__src == *__rtext)
+            if (strisocc(__src + 1, __rtext + 1)) {
                 while (*__ntext != '\0')
                     *__dest++ = *__ntext++;
-                __ntext = (char *)ntext, src_p += r_text_len;
+                __ntext = ntext, __src += r_text_len;
                 continue;
             }
-        *__dest++ = *src_p++;
+        *__dest++ = *__src++;
     }
     *__dest = '\0';
     return dest;
