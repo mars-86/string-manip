@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include "str_manip.h"
-
-static inline int str_is_match(const char *src, const char *word)
-{
-    while (*word != '\0')
-        if (*word++ != *src++) return 0;
-    return 1;
-}
+#include "common.h"
 
 char *str_replace(char *dest, const char *src, const char *rtext, const char *ntext)
 {

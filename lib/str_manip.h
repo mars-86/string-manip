@@ -18,23 +18,23 @@ extern void __cdecl str_split_free(char ***__src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
 
 /* to lower case SRC to DEST */
-extern char * __cdecl str_lowerc(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_lowercase(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to lower case no more than N characters of SRC to DEST */
-extern char * __cdecl strn_lowerc(char *__restrict __dest, const char *__restrict __src, size_t __n)
+extern char * __cdecl strn_lowercase(char *__restrict __dest, const char *__restrict __src, size_t __n)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to upper case SRC to DEST */
-extern char * __cdecl str_upperc(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_uppercase(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to upper case no more than N characters of SRC to DEST */
-extern char * __cdecl strn_upperc(char *__restrict __dest, const char *__restrict __src, size_t __n)
+extern char * __cdecl strn_uppercase(char *__restrict __dest, const char *__restrict __src, size_t __n)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
-/* count OCCURRENCE ocurrences within SRC */
-extern int __cdecl str_occ(const char *__restrict __src, const char *__restrict __occurrence)
+/* count WORD ocurrence within SRC */
+extern int __cdecl str_occurrence(const char *__restrict __src, const char *__restrict __word)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* trim SRC to DEST */
