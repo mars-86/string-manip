@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "str_manip.h"
 #include "common.h"
 

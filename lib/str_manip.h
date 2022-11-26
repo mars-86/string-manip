@@ -1,6 +1,8 @@
 #ifndef _LIB_STR_MANIP_INCLUDED_H_
 #define _LIB_STR_MANIP_INCLUDED_H_
 
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */

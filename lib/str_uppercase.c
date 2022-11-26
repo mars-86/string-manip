@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <str_manip.h>
-#include <str_char.h>
+#include "str_manip.h"
+#include "str_char.h"
 
 char *str_uppercase(char *dest, const char *src)
 {
