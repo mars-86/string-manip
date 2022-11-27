@@ -1,6 +1,8 @@
 #ifndef _LIB_STR_MANIP_INCLUDED_H_
 #define _LIB_STR_MANIP_INCLUDED_H_
 
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -13,28 +15,28 @@ extern char * __cdecl str_replace(char *__restrict __dest, const char *__restric
 extern char **__cdecl str_split(char ***__restrict __dest, const char *__restrict __src, const char *__restrict __delim)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2) __MINGW_ATTRIB_NONNULL(3);
 
-/* free SRC created previously with strsplit */
+/* free SRC created previously with str_split */
 extern void __cdecl str_split_free(char ***__src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
 
 /* to lower case SRC to DEST */
-extern char * __cdecl str_lowerc(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_lowercase(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to lower case no more than N characters of SRC to DEST */
-extern char * __cdecl strn_lowerc(char *__restrict __dest, const char *__restrict __src, size_t __n)
+extern char * __cdecl strn_lowercase(char *__restrict __dest, const char *__restrict __src, size_t __n)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to upper case SRC to DEST */
-extern char * __cdecl str_upperc(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_uppercase(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* to upper case no more than N characters of SRC to DEST */
-extern char * __cdecl strn_upperc(char *__restrict __dest, const char *__restrict __src, size_t __n)
+extern char * __cdecl strn_uppercase(char *__restrict __dest, const char *__restrict __src, size_t __n)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
-/* count OCCURRENCE ocurrences within SRC */
-extern int __cdecl str_occ(const char *__restrict __src, const char *__restrict __occurrence)
+/* count WORD ocurrence within SRC */
+extern int __cdecl str_occurrence(const char *__restrict __src, const char *__restrict __word)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* trim SRC to DEST */
@@ -42,18 +44,18 @@ extern char * __cdecl str_trim(char *__restrict __dest, const char *__restrict _
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* trim SRC front to DEST */
-extern char * __cdecl str_trimf(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_trim_front(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* trim SRC back to DEST */
-extern char * __cdecl str_trimb(char *__restrict __dest, const char *__restrict __src)
+extern char * __cdecl str_trim_back(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
-/*  */
+/* pad SRC's front PADDING times with PTEXT */
 extern char *__cdecl str_pad_front(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
-/*  */
+/* pad SRC's back PADDING times with PTEXT */
 extern char *__cdecl str_pad_back(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
