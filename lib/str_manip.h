@@ -15,7 +15,7 @@ extern char * __cdecl str_replace(char *__restrict __dest, const char *__restric
 extern char **__cdecl str_split(char ***__restrict __dest, const char *__restrict __src, const char *__restrict __delim)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2) __MINGW_ATTRIB_NONNULL(3);
 
-/* free SRC created previously with strsplit */
+/* free SRC created previously with str_split */
 extern void __cdecl str_split_free(char ***__src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
 
