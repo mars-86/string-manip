@@ -34,6 +34,9 @@ int main(void)
     printf("%s\n", str_pad_back(dest, s2, "123456", 6)); // "abc123"
     printf("%s\n", str_pad_back(dest, s2, " ", 1)); // "abc"
 
-    printf("\n%s\n", str_replace(dest, s1, "be", "ass"));
+    printf("\n%s\n", str_replace(dest, s1, "be", "code"));
     printf("\n%s\n", str_replace(dest, dest, "question", "matter"));
+
+    printf("\n%c\n", str_char_at(s1, 43));
+    printf("%d\n", str_char_code_at(s1, 10));
 }
