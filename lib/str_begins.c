@@ -1,5 +1,5 @@
 #include <string.h>
-#include "str_test.h"
+#include "str_manip.h"
 #include "common.h"
 
 int str_begins_with(const char *src, const char *text)
