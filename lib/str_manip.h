@@ -59,6 +59,14 @@ extern char *__cdecl str_pad_front(char *__restrict __dest, const char *__restri
 extern char *__cdecl str_pad_back(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
+/* return SRC char at IDX position */
+extern char __cdecl str_char_at(const char *__src, size_t __idx)
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
+
+/* return SRC char code at IDX position */
+extern int __cdecl str_char_code_at(const char *__src, size_t __idx)
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
