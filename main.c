@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "string_manip.h"
-#include <string.h>
 
 int main(void)
 {
