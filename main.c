@@ -38,4 +38,7 @@ int main(void)
 
     printf("\n%c\n", str_char_at(s1, 43));
     printf("%d\n", str_char_code_at(s1, 10));
+
+    printf("\n%s\n", str_uppercase(dest, s2));
+    printf("\n%s\n", str_lowercase(dest, "ABc"));
 }
