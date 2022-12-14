@@ -51,6 +51,10 @@ extern char * __cdecl str_trim_front(char *__restrict __dest, const char *__rest
 extern char * __cdecl str_trim_back(char *__restrict __dest, const char *__restrict __src)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
+/* remove char from SRC back to DEST */
+extern char * __cdecl str_remove_char(char *__restrict __dest, const char *__restrict __src, const char c)
+    __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
+
 /* pad SRC's front PADDING times with PTEXT */
 extern char *__cdecl str_pad_front(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
