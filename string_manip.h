@@ -1,6 +1,6 @@
-#ifndef _STRING_MANIP_INCLUDED_H_
-#define _STRING_MANIP_INCLUDED_H_
+#ifndef __STRING_MANIP_INCLUDED_H__
+#define __STRING_MANIP_INCLUDED_H__
 
 #include "lib/str_manip.h"
 
-#endif // _STRING_MANIP_INCLUDED_H_
+#endif // __STRING_MANIP_INCLUDED_H__

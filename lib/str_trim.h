@@ -1,5 +1,5 @@
-#ifndef _LIB_STR_TRIM_INCLUDED_H_
-#define _LIB_STR_TRIM_INCLUDED_H_
+#ifndef __LIB_STR_TRIM_INCLUDED_H__
+#define __LIB_STR_TRIM_INCLUDED_H__
 
 #define TRIM_TEST_N(src) src != ' ' && src != '\n' && src != '\t'
 #define TRIM_TEST(src) src == ' ' || src == '\n' || src == '\t'
@@ -14,4 +14,4 @@
         while (TRIM_TEST(*src)) --src;  \
     } while (0)
 
-#endif // _LIB_STR_TRIM_INCLUDED_H_
+#endif // __LIB_STR_TRIM_INCLUDED_H__

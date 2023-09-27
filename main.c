@@ -20,7 +20,7 @@ int main(void)
     printf("%d\n", str_includes(s1, "TO BE")); // false
 
     const char *s2 = "abc";
-    char dest[128];
+    char dest[128], dest2[128];
 
     printf("\n%s\n", str_pad_front(dest, s2, " ", 10)); // "       abc"
     printf("%s\n", str_pad_front(dest, s2, "foo", 10)); // "foofoofabc"
@@ -34,7 +34,7 @@ int main(void)
     printf("%s\n", str_pad_back(dest, s2, " ", 1)); // "abc"
 
     printf("\n%s\n", str_replace(dest, s1, "be", "code"));
-    printf("%s\n", str_replace(dest, dest, "question", "matter"));
+    printf("%s\n", str_replace(dest2, dest, "question", "matter"));
 
     printf("\n%c\n", str_char_at(s1, 43));
     printf("%d\n", str_char_code_at(s1, 10));

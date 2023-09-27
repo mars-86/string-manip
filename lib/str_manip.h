@@ -1,5 +1,5 @@
-#ifndef _LIB_STR_MANIP_INCLUDED_H_
-#define _LIB_STR_MANIP_INCLUDED_H_
+#ifndef __LIB_STR_MANIP_INCLUDED_H__
+#define __LIB_STR_MANIP_INCLUDED_H__
 
 #ifdef _WIN32
  #if defined __MINGW32__ || defined __MINGW64__
@@ -11,4 +11,4 @@
  #include "sys/linux/proto.h"
 #endif // _WIN32
 
-#endif // _LIB_STR_MANIP_INCLUDED_H_
+#endif // __LIB_STR_MANIP_INCLUDED_H__
