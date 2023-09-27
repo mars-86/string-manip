@@ -1,5 +1,5 @@
-#ifndef _LIB_LINUX_PROTO_INCLUDED_H_
-#define _LIB_LINUX_PROTO_INCLUDED_H_
+#ifndef __LIB_LINUX_PROTO_INCLUDED_H__
+#define __LIB_LINUX_PROTO_INCLUDED_H__
 
 #include <stdio.h>
 
@@ -101,4 +101,4 @@ extern int str_includes_from(const char *__restrict __src, const char *__restric
 }
 #endif /* __cplusplus */
 
-#endif // _LIB_LINUX_PROTO_INCLUDED_H_
+#endif // __LIB_LINUX_PROTO_INCLUDED_H__

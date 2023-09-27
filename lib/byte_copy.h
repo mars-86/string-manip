@@ -1,5 +1,5 @@
-#ifndef _LIB_BYTE_COPY_INCLUDED_H_
-#define _LIB_BYTE_COPY_INCLUDED_H_
+#ifndef __LIB_BYTE_COPY_INCLUDED_H__
+#define __LIB_BYTE_COPY_INCLUDED_H__
 
 #define COPY_BYTES_FWD(dest, src)   \
     do {                            \
@@ -7,4 +7,4 @@
             *dest++ = *src++;       \
     } while (0)
 
-#endif // _LIB_BYTE_COPY_INCLUDED_H_
+#endif // __LIB_BYTE_COPY_INCLUDED_H__

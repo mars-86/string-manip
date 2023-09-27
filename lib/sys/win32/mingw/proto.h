@@ -1,5 +1,5 @@
-#ifndef _LIB_WIN32_MINGW_PROTO_INCLUDED_H_
-#define _LIB_WIN32_MINGW_PROTO_INCLUDED_H_
+#ifndef __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
+#define __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
 
 #include <stdio.h>
 
@@ -56,11 +56,11 @@ extern char * __cdecl str_remove_char(char *__restrict __dest, const char *__res
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* pad SRC's front PADDING times with PTEXT */
-extern char *__cdecl str_pad_front(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
+extern char * __cdecl str_pad_front(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* pad SRC's back PADDING times with PTEXT */
-extern char *__cdecl str_pad_back(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
+extern char * __cdecl str_pad_back(char *__restrict __dest, const char *__restrict __src, const char *__restrict __ptext, int __padding)
     __MINGW_NOTHROW __MINGW_ATTRIB_NONNULL(1) __MINGW_ATTRIB_NONNULL(2);
 
 /* return SRC char at IDX position */
@@ -101,4 +101,4 @@ extern int __cdecl str_includes_from(const char *__restrict __src, const char *_
 }
 #endif /* __cplusplus */
 
-#endif // _LIB_WIN32_MINGW_PROTO_INCLUDED_H_
+#endif // __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
