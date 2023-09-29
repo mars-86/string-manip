@@ -43,6 +43,10 @@ Release
 bin/
 obj/
 
+# Custom Build Folders
+debug
+release
+
 # Codeblocks project
 *.cbp
 *.depend
