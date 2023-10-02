@@ -31,6 +31,12 @@
 *.out
 *.app
 
+# Testing files cov
+*.gcda
+*.gcno
+*.gcov
+
+
 # Visual Studio Folders
 .vs/
 VTGraph/Debug/
