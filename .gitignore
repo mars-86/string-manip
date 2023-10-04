@@ -31,6 +31,12 @@
 *.out
 *.app
 
+# Testing files cov
+*.gcda
+*.gcno
+*.gcov
+
+
 # Visual Studio Folders
 .vs/
 VTGraph/Debug/
@@ -46,6 +52,8 @@ obj/
 # Custom Build Folders
 debug
 release
+coverage
+analisys
 
 # Codeblocks project
 *.cbp
