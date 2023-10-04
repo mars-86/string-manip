@@ -7,10 +7,12 @@ CC=gcc
 CFLAGS=-Wall -pedantic -I $(INCDIR)
 
 ###############################################################
-# BUILDS FLAGS
+# BUILD FLAGS
 DEBUG_FLAGS=-g
 TEST_FLAGS=-fprofile-arcs -ftest-coverage
 ANALISYS_FLAGS=-g
+FPIC_FLAGS=-fPIC
+SHARED_FLAGS=-shared
 
 ###############################################################
 # DIRECTORIES
@@ -37,7 +39,7 @@ ANALISYS_STATS_DIR=$(ANALISYS_DIR)/stats
 ###############################################################
 # BINARY NAMES
 DEBUG_OUT_NAME=str_manip.debug.out
-RELEASE_OUT_NAME=str_manip.out
+RELEASE_OUT_NAME=str_manip.so
 TEST_OUT_NAME=test.out
 ANALISYS_OUT_NAME=analisys.out
 
@@ -105,11 +107,11 @@ endif
 
 ###############################################################
 # DEBUG DIRECTIVES
-$(DEBUG_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
+# $(DEBUG_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
+#	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
 
 $(DEBUG_OBJ_DIR)/%.o: $(SRCDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
+	$(CC) -c -o $@ $< $(FPIC_FLAGS) $(DEBUG_FLAGS) $(CFLAGS)
 
 $(DEBUG_OBJ_DIR):
 	mkdir -p $@
@@ -118,15 +120,15 @@ $(DEBUG_OUT_DIR):
 	mkdir -p $@
 
 $(DEBUG_BUILD): $(OBJ)
-	$(CC) -o $@ $^ $(DEBUG_FLAGS) $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(SHARED_FLAGS) $(DEBUG_FLAGS) $(CFLAGS) $(LIBS)
 
 ###############################################################
 # RELEASE DIREVTIVES
-$(RELEASE_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+# $(RELEASE_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
+#	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(RELEASE_OBJ_DIR)/%.o: $(SRCDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(FPIC_FLAGS) $(CFLAGS)
 
 $(RELEASE_OBJ_DIR):
 	mkdir -p $@
@@ -135,7 +137,7 @@ $(RELEASE_OUT_DIR):
 	mkdir -p $@
 
 $(RELEASE_BUILD): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(SHARED_FLAGS) $(CFLAGS) $(LIBS)
 
 ###############################################################
 # TEST DIRECTIVES
