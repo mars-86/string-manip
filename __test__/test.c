@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "../string_manip.h"
+#include "../lib/str_manip.h"
 
 int main(void)
 {

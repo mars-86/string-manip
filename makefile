@@ -7,10 +7,16 @@ CC=gcc
 CFLAGS=-Wall -pedantic -I $(INCDIR)
 
 ###############################################################
-# BUILDS FLAGS
+# BUILD FLAGS
 DEBUG_FLAGS=-g
 TEST_FLAGS=-fprofile-arcs -ftest-coverage
 ANALISYS_FLAGS=-g
+FPIC_FLAGS=-fPIC
+SHARED_FLAGS=-shared
+
+###############################################################
+# LIB HEADER
+LIB_HEADER=str_manip.h
 
 ###############################################################
 # DIRECTORIES
@@ -22,6 +28,11 @@ LIB_DIR=lib
 TEST_DIR=__test__
 COVERAGE_DIR=coverage
 ANALISYS_DIR=analisys
+STATS_DIR=stats
+SYS_DIR=sys
+LINUX_DIR=linux
+WIN32_DIR=win32
+MINGW_DIR=mingw
 
 DEBUG_OBJ_DIR=$(DEBUG_DIR)/$(OBJECT_DIR)
 DEBUG_OUT_DIR=$(DEBUG_DIR)/$(OUTPUT_DIR)
@@ -32,12 +43,14 @@ TEST_OUT_DIR=$(TEST_DIR)/$(OUTPUT_DIR)
 TEST_COV_DIR=$(TEST_DIR)/$(COVERAGE_DIR)
 ANALISYS_OBJ_DIR=$(ANALISYS_DIR)/$(OBJECT_DIR)
 ANALISYS_OUT_DIR=$(ANALISYS_DIR)/$(OUTPUT_DIR)
-ANALISYS_STATS_DIR=$(ANALISYS_DIR)/stats
+ANALISYS_STATS_DIR=$(ANALISYS_DIR)/$(STATS_DIR)
+
+HEADER_DIR=$(LIB_DIR)/$(SYS_DIR)/$(LINUX_DIR)
 
 ###############################################################
 # BINARY NAMES
-DEBUG_OUT_NAME=str_manip.debug.out
-RELEASE_OUT_NAME=str_manip.out
+DEBUG_OUT_NAME=str_manip.debug.so
+RELEASE_OUT_NAME=str_manip.so
 TEST_OUT_NAME=test.out
 ANALISYS_OUT_NAME=analisys.out
 
@@ -47,6 +60,8 @@ DEBUG_BUILD=$(DEBUG_OUT_DIR)/$(DEBUG_OUT_NAME)
 RELEASE_BUILD=$(RELEASE_OUT_DIR)/$(RELEASE_OUT_NAME)
 TEST_BUILD=$(TEST_OUT_DIR)/$(TEST_OUT_NAME)
 ANALISYS_BUILD=$(ANALISYS_OUT_DIR)/$(ANALISYS_OUT_NAME)
+DEBUG_COPY_HEADER=$(DEBUG_OUT_DIR)/$(LIB_HEADER)
+RELEASE_COPY_HEADER=$(RELEASE_OUT_DIR)/$(LIB_HEADER)
 
 LIBS=
 
@@ -105,11 +120,11 @@ endif
 
 ###############################################################
 # DEBUG DIRECTIVES
-$(DEBUG_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
+# $(DEBUG_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
+#	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
 
 $(DEBUG_OBJ_DIR)/%.o: $(SRCDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(DEBUG_FLAGS) $(CFLAGS)
+	$(CC) -c -o $@ $< $(FPIC_FLAGS) $(DEBUG_FLAGS) $(CFLAGS)
 
 $(DEBUG_OBJ_DIR):
 	mkdir -p $@
@@ -118,15 +133,18 @@ $(DEBUG_OUT_DIR):
 	mkdir -p $@
 
 $(DEBUG_BUILD): $(OBJ)
-	$(CC) -o $@ $^ $(DEBUG_FLAGS) $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(SHARED_FLAGS) $(DEBUG_FLAGS) $(CFLAGS) $(LIBS)
+
+$(DEBUG_COPY_HEADER): $(HEADER_DIR)/$(LIB_HEADER)
+	cp -f $< $@
 
 ###############################################################
 # RELEASE DIREVTIVES
-$(RELEASE_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+# $(RELEASE_OBJ_DIR)/%.o: $(MAINDIR)/%.c $(DEPS)
+#	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(RELEASE_OBJ_DIR)/%.o: $(SRCDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(FPIC_FLAGS) $(CFLAGS)
 
 $(RELEASE_OBJ_DIR):
 	mkdir -p $@
@@ -135,7 +153,10 @@ $(RELEASE_OUT_DIR):
 	mkdir -p $@
 
 $(RELEASE_BUILD): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(SHARED_FLAGS) $(CFLAGS) $(LIBS)
+
+$(RELEASE_COPY_HEADER): $(HEADER_DIR)/$(LIB_HEADER)
+	cp -f $< $@
 
 ###############################################################
 # TEST DIRECTIVES
@@ -179,9 +200,9 @@ $(ANALISYS_BUILD): $(OBJ)
 
 ###############################################################
 # BUILD RECIPES
-build-debug: $(DEBUG_OBJ_DIR) $(DEBUG_OUT_DIR) $(DEBUG_BUILD)
+build-debug: $(DEBUG_OBJ_DIR) $(DEBUG_OUT_DIR) $(DEBUG_BUILD) $(DEBUG_COPY_HEADER)
 
-build-release: $(RELEASE_OBJ_DIR) $(RELEASE_OUT_DIR) $(RELEASE_BUILD)
+build-release: $(RELEASE_OBJ_DIR) $(RELEASE_OUT_DIR) $(RELEASE_BUILD) $(RELEASE_COPY_HEADER)
 
 test: $(TEST_OBJ_DIR) $(TEST_OUT_DIR) $(TEST_COV_DIR) $(TEST_BUILD)
 	# run the test, which will generate test.gcna and test.gcno
