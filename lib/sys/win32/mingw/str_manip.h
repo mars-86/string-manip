@@ -1,5 +1,5 @@
-#ifndef __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
-#define __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
+#ifndef __LIB_WIN32_MINGW_STR_MANIP_INCLUDED_H__
+#define __LIB_WIN32_MINGW_STR_MANIP_INCLUDED_H__
 
 #include <stdio.h>
 
@@ -101,4 +101,4 @@ extern int __cdecl str_includes_from(const char *__restrict __src, const char *_
 }
 #endif /* __cplusplus */
 
-#endif // __LIB_WIN32_MINGW_PROTO_INCLUDED_H__
+#endif // __LIB_WIN32_MINGW_STR_MANIP_INCLUDED_H__

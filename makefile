@@ -183,7 +183,7 @@ $(ANALISYS_BUILD): $(OBJ)
 # BUILD RECIPES
 build-debug: $(DEBUG_OBJ_DIR) $(DEBUG_OUT_DIR) $(DEBUG_BUILD)
 
-build-release: $(RELEASE_OBJ_DIR) $(RELEASE_OUT_DIR) $(RELEASE_BUILD)
+build-release: $(RELEASE_OBJ_DIR) $(RELEASE_OUT_DIR) $(RELEASE_BUILD) $(shell cp lib/sys/linux/str_manip.h release/bin/str_manip.h)
 
 test: $(TEST_OBJ_DIR) $(TEST_OUT_DIR) $(TEST_COV_DIR) $(TEST_BUILD)
 	# run the test, which will generate test.gcna and test.gcno
