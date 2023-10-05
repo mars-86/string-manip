@@ -22,7 +22,22 @@ int main(void)
     assert(str_includes(s1, "TO BE") == 0); // false
 
     const char *s2 = "abc";
+    char s3[] = "To be, or not to be, that is the question.";
+    const char s3_res[][10] = {{"To"}, {"be,"}, {"or"}, {"not"}, {"to"}, {"be,"}, {"that"}, {"is"}, {"the"}, {"question."}};
     char dest[128], dest2[128];
+
+    char **s3_split = str_split(s3, " ");
+    assert(s3_split != NULL);
+
+    int i;
+    for (i = 0; s3_split[i] != NULL; ++i) {
+        if (strcmp(s3_split[i], s3_res[i]) != 0) {
+            str_split_free(s3_split);
+            printf("assertion failed at index: %d\n", i);
+            assert(-1 == i);
+        }
+    }
+    str_split_free(s3_split);
 
     assert(strcmp(str_pad_front(dest, s2, " ", 10), "       abc") == 0); // "       abc"
     assert(strcmp(str_pad_front(dest, s2, "foo", 10), "foofoofabc") == 0); // "foofoofabc"
