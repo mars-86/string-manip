@@ -12,11 +12,11 @@ extern char * str_replace(char *__restrict __dest, const char *__restrict __src,
     __attribute__((nothrow)) __attribute__((nonnull (1, 2, 3, 4)));
 
 /* split SRC according to DELIM to DEST */
-extern char ** str_split(char ***__restrict __dest, const char *__restrict __src, const char *__restrict __delim)
-    __attribute__((nothrow)) __attribute__((nonnull (1, 2, 3)));
+extern char ** str_split(char *__restrict __src, const char *__restrict __delim)
+    __attribute__((nothrow)) __attribute__((nonnull (1, 2)));
 
 /* free SRC created previously with str_split */
-extern void str_split_free(char ***__src)
+extern void str_split_free(char **__src)
     __attribute__((nothrow)) __attribute__((nonnull (1)));
 
 /* to lower case SRC to DEST */
