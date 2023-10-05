@@ -2,26 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include "str_manip.h"
-#include "common.h"
+#include "byte_copy.h"
 
-char **str_split(char ***dest, const char *src, const char *delim)
+char **str_split(char *src, const char *delim)
 {
-    int __occur = str_is_match(src, delim) + 2;
-    char __src_temp[strlen(src) + 1], *__token;
-    char **__dest = *dest = (char **)malloc(__occur * sizeof(char *));
-    sprintf(__src_temp, "%s", src);
-    for(__token = strtok(__src_temp, delim); __token != NULL; __token = strtok(NULL, delim), __dest++) {
-        *__dest = (char *)malloc((strlen(__token) + 1) * sizeof(char));
-        sprintf(*__dest, "%s", __token);
-    }
-    *__dest = NULL;
-    return *dest;
+    // calculate strlen to allocate the string pointers beforehand so we call malloc once. We add 2 for NULL termination.
+    int __dest_len = str_occurrence(src, delim) + 2;
+    char **__dest_temp, **__dest;
+    char *__token;
+
+    __dest_temp = __dest = (char **)malloc(__dest_len * sizeof(char *));
+    if (!__dest_temp) return NULL;
+
+    for(__token = strtok_r(src, delim, &src); __token != NULL; __token = strtok_r(NULL, delim, &src), __dest_temp++)
+        *__dest_temp = strndup(__token, strlen(__token));
+    *__dest_temp = NULL;
+
+    return __dest;
 }
 
-void str_split_free(char ***dest)
+void str_split_free(char **src)
 {
-    char **__dest = *dest;
-    while (*__dest != NULL)
-        free(*__dest), __dest++;
-    free(*dest);
+    char **__src;
+    for (__src = src; *__src != NULL; ++__src)
+        free(*__src);
+    free(src);
 }
