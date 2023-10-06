@@ -4,28 +4,15 @@
 You can download the code from releases page https://github.com/mars-86/string-manip/releases
 
 ## Overview
-Library for C language to manipulate strings
+Library for C language to manipulate strings.
 
 ## Installation
-#### Prerequisites
-##### Windows subsystem for linux
-- turn windows features on or off
-- enable windows subsystem for linux
-- enable virtual machine platform
-- wsl --update
-- wsl --set-default-version 2
+Clone the library.
 
-##### Mingw
-You will need to install mingw if you download the docker-cli version without libraries.
-
-#### Install docker CLI
-Just run install.bat and it will install docker cli on user's root folder
-![Docker CLI for Windows](https://github.com/mars-86/static-assets/raw/main/images/docker-cli/docker-cli-002.jpg)
+#### Install the lib
+Just put the .so .h from bin/release after building the library into the directory of the project in where you want to use the lib.
 
 ## Usage
-Run docker command from console.
-![Docker CLI for Windows](https://github.com/mars-86/static-assets/raw/main/images/docker-cli/docker-cli-001.jpg)
-
 gcc -Wall {src}.c -o {file}.out -Wl,-rpath={library_path} -L{library_path} -l:str_manip.so__
     i.e. gcc -Wall main.c -o main.out -Wl,-rpath=. -L. -l:str_manip.so (supposing that the .so lib is in the same directory as main.c )
 
